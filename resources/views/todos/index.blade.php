@@ -28,20 +28,27 @@
         }
         .plus-button {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             background-color: #6c63ff;
             color: white;
             border: none;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
+            width: 60px;
+            height: 60px;
+            font-size: 28px;
             cursor: pointer;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, width 0.3s, height 0.3s, font-size 0.3s;
         }
         .plus-button:hover {
             background-color: #5a54d1;
+            width: 65px;
+            height: 65px;
+            font-size: 30px;
         }
         .icon-button {
             background: none;
