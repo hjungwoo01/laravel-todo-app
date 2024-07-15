@@ -10,7 +10,7 @@ class TodoController extends Controller
     // Display a listing of the resource
     public function index()
     {
-        $todos = Todo::all();
+        $todos = Todo::orderBy('completed')->get();
         return view('todos.index', compact('todos'));
     }
 
@@ -52,7 +52,6 @@ class TodoController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'nullable',
-            'completed' => 'required|boolean',
         ]);
 
         $todo->update($request->all());
@@ -68,5 +67,13 @@ class TodoController extends Controller
 
         return redirect()->route('todos.index')
                          ->with('success', 'Todo deleted successfully.');
+    }
+
+    public function toggleComplete(Todo $todo)
+    {
+        $todo->completed = !$todo->completed;
+        $todo->save();
+
+        return response()->json(['status' => 'success']);
     }
 }

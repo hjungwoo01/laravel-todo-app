@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Edit Todo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <h1>Edit Todo</h1>
@@ -12,11 +13,6 @@
         <input type="text" id="title" name="title" value="{{ $todo->title }}" required>
         <label for="description">Description:</label>
         <textarea id="description" name="description">{{ $todo->description }}</textarea>
-        <label for="completed">Completed:</label>
-        <select id="completed" name="completed" required>
-            <option value="0" {{ !$todo->completed ? 'selected' : '' }}>No</option>
-            <option value="1" {{ $todo->completed ? 'selected' : '' }}>Yes</option>
-        </select>
         <button type="submit">Update</button>
     </form>
     @if($errors->any())
