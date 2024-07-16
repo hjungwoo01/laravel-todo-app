@@ -49,6 +49,10 @@
                 <label for="description">Description:</label>
                 <textarea class="form-control" id="description" name="description" rows="4">{{ $todo->description }}</textarea>
             </div>
+            <div class="form-group">
+                <label for="due_date">Due Date:</label>
+                <input type="date" class="form-control" id="due_date" name="due_date" value="{{ $todo->due_date }}">
+            </div>
             <button type="submit" class="btn btn-primary btn-block">Update</button>
         </form>
         @if($errors->any())

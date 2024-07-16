@@ -36,6 +36,24 @@
             <strong>Description:</strong>
             <p>{{ $todo->description }}</p>
         </div>
+        <div class="mb-4">
+            <strong>Due Date:</strong>
+            @if($todo->due_date)
+                <p>{{ \Carbon\Carbon::parse($todo->due_date)->format('M d, Y') }}</p>
+            @else
+                <p>No due date set</p>
+            @endif
+        </div>
+        @if($todo->completed)
+        <div class="mb-4">
+            <strong>Completed Date:</strong>
+            @if($todo->completed_at)
+                <p>{{ \Carbon\Carbon::parse($todo->completed_at)->format('M d, Y') }}</p>
+            @else
+                <p>No completion date set</p>
+            @endif
+        </div>
+        @endif
         <a href="{{ route('todos.index') }}" class="btn btn-primary btn-block">Back to List</a>
     </div>
 </body>

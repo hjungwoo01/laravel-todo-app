@@ -1,14 +1,23 @@
 # Laravel Todo Application
 
-This is a simple Todo application built with Laravel and MySQL. It allows users to create, read, update, and delete (CRUD) todo items.
+This is a simple Todo application built with Laravel and MySQL. It allows users to create, read, update, and delete (CRUD) todo items, manage due dates, and mark items as completed.
 
 ## Features
 
-- Create new todo items
-- View a list of all todo items
+- Create new todo items with optional descriptions and due dates
+- View a list of all todo items, categorized by completion status
 - Update existing todo items
 - Delete todo items
-- Mark todo items as completed
+- Mark todo items as completed, tracking the completion date
+- Tasks are ordered by due date and completed tasks by completion date
+
+## UI Example
+
+For a visual representation of the application, see the example screenshot below:
+
+<p align="center">
+  <img src="./images/main_page.png" width="250">
+</p>
 
 ## Requirements
 
@@ -90,10 +99,10 @@ Open your browser and navigate to `http://localhost:8000/todos`.
 ### CRUD Operations
 
 - **Create a New Todo:** Click on "Create New Todo" and fill out the form.
-- **View Todos:** The homepage lists all todos.
+- **View Todos:** The homepage lists all todos, ordered by due date and categorized by completion status.
 - **Edit a Todo:** Click on "Edit" next to a todo item, update the form, and save.
 - **Delete a Todo:** Click on "Delete" next to a todo item.
-- **Mark a Todo as Completed:** In the edit form, set "Completed" to "Yes".
+- **Mark a Todo as Completed:** Click the checkbox next to a todo item. Completed tasks are tracked with a completion date and are moved to the "Completed Tasks" section.
 
 ## Project Structure
 

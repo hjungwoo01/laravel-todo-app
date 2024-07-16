@@ -10,8 +10,9 @@ class TodoController extends Controller
     // Display a listing of the resource
     public function index()
     {
-        $todos = Todo::orderBy('completed')->get();
-        return view('todos.index', compact('todos'));
+        $todos = Todo::all()->sortBy('due_date');
+        $completedTodos = Todo::where('completed', true)->orderByDesc('completed_at')->get();
+        return view('todos.index', compact('todos', 'completedTodos'));
     }
 
     // Show the form for creating a new resource
@@ -72,6 +73,7 @@ class TodoController extends Controller
     public function toggleComplete(Todo $todo)
     {
         $todo->completed = !$todo->completed;
+        $todo->completed_at = $todo->completed ? now() : null;
         $todo->save();
 
         return response()->json(['status' => 'success']);

@@ -67,31 +67,39 @@
         <h1 class="my-4 text-center">Todo List</h1>
 
         <div class="list-group mb-4">
-            @foreach ($todos->where('completed', false) as $todo)
-                <div class="list-group-item task-item">
-                    <div>
-                        <input type="checkbox" onclick="toggleComplete({{ $todo->id }})" class="mr-2">
-                        <a href="{{ route('todos.show', $todo->id) }}">{{ $todo->title }}</a>
+            @foreach ($todos as $todo)
+                @if (!$todo->completed)
+                    <div class="list-group-item task-item">
+                        <div>
+                            <input type="checkbox" onclick="toggleComplete({{ $todo->id }})" class="mr-2">
+                            <a href="{{ route('todos.show', $todo->id) }}">{{ $todo->title }}</a>
+                            @if($todo->due_date)
+                                <small class="text-muted">Due: {{ \Carbon\Carbon::parse($todo->due_date)->format('M d, Y') }}</small>
+                            @endif
+                        </div>
+                        <div class="task-actions">
+                            <a href="{{ route('todos.edit', $todo->id) }}" class="icon-button text-primary">✏️</a>
+                            <form action="{{ route('todos.destroy', $todo->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="icon-button text-danger">🗑️</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="task-actions">
-                        <a href="{{ route('todos.edit', $todo->id) }}" class="icon-button text-primary">✏️</a>
-                        <form action="{{ route('todos.destroy', $todo->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="icon-button text-danger">🗑️</button>
-                        </form>
-                    </div>
-                </div>
+                @endif
             @endforeach
         </div>
 
         <h2 class="my-4 text-center">Completed Tasks</h2>
         <div class="list-group">
-            @foreach ($todos->where('completed', true) as $todo)
+            @foreach ($completedTodos as $todo)
                 <div class="list-group-item task-item completed">
                     <div>
                         <input type="checkbox" onclick="toggleComplete({{ $todo->id }})" checked class="mr-2">
                         <a href="{{ route('todos.show', $todo->id) }}">{{ $todo->title }}</a>
+                        @if($todo->completed_at)
+                            <small class="text-muted">Completed: {{ \Carbon\Carbon::parse($todo->completed_at)->format('M d, Y') }}</small>
+                        @endif
                     </div>
                     <div class="task-actions">
                         <a href="{{ route('todos.edit', $todo->id) }}" class="icon-button text-primary">✏️</a>
